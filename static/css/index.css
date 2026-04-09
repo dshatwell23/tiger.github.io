@@ -1,0 +1,225 @@
+body {
+  background: #fffefc;
+  color: #1f2933;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.tiger-navbar {
+  border-bottom: 1px solid #ece7df;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.tiger-wordmark {
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.tiger-hero {
+  background: linear-gradient(180deg, #fff8ee 0%, #fffefc 100%);
+}
+
+.publication-title {
+  color: #14213d;
+  font-family: 'Google Sans', sans-serif;
+  line-height: 1.15;
+}
+
+.publication-authors {
+  font-family: 'Google Sans', sans-serif;
+}
+
+.publication-affiliation {
+  color: #52606d;
+  margin-top: 0.5rem;
+}
+
+.publication-venue {
+  background: #f5ead8;
+  border-radius: 999px;
+  color: #8d4c08;
+  display: inline-block;
+  font-weight: 700;
+  padding: 0.35rem 0.75rem;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.hero-summary {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin: 1.5rem 0;
+  max-width: 42rem;
+}
+
+.hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-pill {
+  background: #fff;
+  border: 1px solid #eadcc5;
+  border-radius: 999px;
+  color: #7d4e10;
+  display: inline-block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.55rem 0.95rem;
+}
+
+.publication-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.section-soft {
+  background: #fbf7f0;
+}
+
+.paper-copy p {
+  line-height: 1.8;
+}
+
+.overview-card,
+.result-card,
+.metrics-card {
+  background: #fff;
+  border: 1px solid #eee5d8;
+  border-radius: 18px;
+  box-shadow: 0 14px 35px rgba(82, 60, 28, 0.06);
+}
+
+.overview-card {
+  height: 100%;
+  padding: 1.5rem;
+}
+
+.paper-figure {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.paper-figure img {
+  background: #fff;
+  border: 1px solid #ece7df;
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-figure {
+  margin: 0;
+}
+
+.paper-figure figcaption {
+  color: #5d6773;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0.9rem auto 0;
+  max-width: 56rem;
+}
+
+.method-cards,
+.dataset-section,
+.result-highlights {
+  margin-top: 1rem;
+}
+
+.results-intro {
+  color: #52606d;
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+}
+
+.result-card {
+  height: 100%;
+  padding: 1.4rem;
+}
+
+.result-kicker {
+  color: #7d4e10;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.result-value {
+  color: #14213d;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+
+.result-label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.result-note,
+.metrics-copy {
+  color: #52606d;
+  line-height: 1.7;
+}
+
+.metrics-card {
+  height: 100%;
+  overflow-x: auto;
+  padding: 1.5rem;
+}
+
+.metrics-table th {
+  color: #243b53;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.metrics-table td,
+.metrics-table th {
+  border-color: #efe8dc !important;
+}
+
+.metrics-table {
+  min-width: 24rem;
+}
+
+.metrics-table code {
+  color: #8d4c08;
+}
+
+.tiger-footer {
+  background: #fff;
+  border-top: 1px solid #ece7df;
+}
+
+@media screen and (max-width: 768px) {
+  .hero-summary {
+    font-size: 1rem;
+  }
+
+  .result-value {
+    font-size: 2rem;
+  }
+
+  .metrics-card,
+  .overview-card,
+  .result-card {
+    padding: 1.2rem;
+  }
+
+  .table.metrics-table {
+    font-size: 0.92rem;
+  }
+}

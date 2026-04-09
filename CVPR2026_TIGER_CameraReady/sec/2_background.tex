@@ -1,0 +1,28 @@
+\section{Related Work}
+\label{sec:rel}
+
+\textbf{Time-aware understanding.}
+Modeling how visual appearance evolves over time has recently attracted growing attention in computer vision.
+Early works explored predicting the \textit{time-of-capture} from single images using either physical or data-driven cues.
+Physically inspired methods~\citep{tsai2016photo, li2017you} estimate time or verify timestamp consistency by analyzing shadows or the Sun’s position, but they require strong priors such as known camera orientation, sky visibility, or external metadata.
+Data-centric approaches~\citep{zhai2019learning, salem2022timestamp, padilha2022content} instead train neural networks to predict temporal attributes such as time-of-day or month from labeled images, often in combination with geo-tags.
+However, these models typically treat time as a classification target and are limited to coarse, discretized predictions.
+GT-Loc~\citep{Shatwell_2025_ICCV} extends this direction by learning a shared embedding space for image, location, and time, but processes each modality independently and aligns them only via a contrastive loss at the embedding level, restricting its ability to capture rich cross-modal geo-temporal relationships.
+In contrast, \tiger explicitly learns these relationships by enabling cross-modal attention between modalities, producing a unified representation that models how visual appearance varies jointly across geolocation and time.
+
+% \vspace{-1em}
+\textbf{Global geo-localization.}
+Geo-localization aims to infer the geographic coordinates of an image or retrieve images taken at similar locations from a large gallery.
+Traditional methods either discretize the globe into geo-cells and frame localization as classification~\citep{weyand2016planet, vo2017revisiting, muller2018geolocation, pramanick2022world, kulkarni2024cityguessr}, or adopt a retrieval-based paradigm that matches query embeddings to stored geospatial features~\citep{regmi2019bridging, shi2020looking, zhu2021vigor, zhu2022transgeo, vivanco2024geoclip, Shatwell_2025_ICCV}.
+Recent approaches such as GeoCLIP~\citep{vivanco2024geoclip} leverage CLIP-style contrastive training to align image and GPS embeddings in a shared feature space, improving large-scale retrieval.
+PIGEON~\citep{Haas_2024_CVPR} combines classification and retrieval for fine-grained localization, while Img2Loc~\citep{zhou2024img2loc} and GAEA~\citep{campos2025gaea} use multimodal large language models to reason jointly over image content and metadata.
+However, these approaches still operate with largely independent encoders and do not explicitly model cross-modal relationships governing geo-temporal variation.
+\tiger bridges this gap by using attention-based fusion to learn a shared representation space in which both \textit{where} and \textit{when} matter: the model can retrieve images captured at the \textit{same} location but at a \textit{different} time, enabling genuine geo-temporal understanding.
+
+% \vspace{-1em}
+\textbf{Geo-temporal and multi-modal representation learning.}
+Beyond standard geo-localization, several works seek to learn representations that combine multiple modalities such as images, satellite, and GPS.
+SatCLIP~\citep{klemmer2023satclip} and related approaches~\citep{zavras2024mind, pmlr-v202-mai23a, Aodha_2019_ICCV} extend CLIP-like dual encoders approach to align satellite, ground-level views, or GPS for cross-domain geospatial tasks.
+While these dual-encoder methods highlight the effectiveness of contrastive learning for spatial alignment, they still encode each modality independently and rely on fixed modality pairs.
+\tiger departs from this paradigm by employing a shared multimodal transformer and joint contrastive learning that allows image, GPS, and time to \emph{attend to each other}, inspired by~\cite{shvetsova2022everything, swetha2023preserving}.
+This design enables the model to learn fine-grained geo-temporal correlations (e.g., how a specific location changes across seasons or lighting conditions) and to perform retrieval across arbitrary modality combinations, rather than being constrained to pre-defined pairs.

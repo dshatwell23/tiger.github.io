@@ -1,0 +1,42 @@
+\vspace{-1em}
+
+\section{Introduction}
+
+Understanding how a location visually appears across different points in time is essential for many real-world applications, including digital forensics, environmental and climate change analysis, cultural heritage preservation, and augmented reality. In these settings, the goal is not simply to retrieve images that look similar to a query, but to retrieve images that correspond to the \emph{same physical location} at a \emph{specified target time}. For example, a query image of a city square in winter should retrieve an image of the same square in summer, despite large differences in foliage, lighting, pedestrian patterns, or ongoing construction. This capability requires models that represent location identity robustly while explicitly accounting for temporal variation in how that location appears.
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=0.9\linewidth]{figures/geotime-fig.pdf}
+\end{center}
+\vspace{-1em}
+\caption{
+% \textbf{Schematic diagram of the geo-time-aware image retrieval task}. Given a query image $I^Q$ and a target time $t^Q$, the model retrieves a gallery image $I^G$ from (approximately) the same geographic location but matching the specified time.
+\tiger unifies time, image, and location understanding, enabling geo-localization, time prediction, and geo-time aware image retrieval: given a query image and a target time, it retrieves an image captured at the same location at the specified time.
+}
+\label{fig:geotime-fig}
+\end{figure}
+
+We formalize this setting as \emph{Geo-Time Aware Image Retrieval}. Given a query image and a target time, the task is to retrieve an image captured at the same location at the specified time, rather than one chosen only based on visual similarity (Figure~\ref{fig:geotime-fig}). The central challenge is to learn representations that factor out appearance changes driven by time while preserving the underlying geo-location semantics of a place. 
+However, existing approaches do not address this challenge. Standard image retrieval methods primarily rank images based on appearance similarity \cite{zhu2023r2former, keetha2023anyloc, Berton_2025_CVPR}, but are trained to be invariant to the time-of-capture. Composed retrieval methods can modify visual attributes (e.g., “with snow,” “at night”) \cite{saito2023pic2word, baldrati2023zero}, but these transformations operate purely in the image domain and do not guarantee that the retrieved image comes from the same geographic location. Geo-localization models, on the other hand, aim to estimate where an image was taken, and prior work \cite{zhai2019learning, Shatwell_2025_ICCV} extends this to jointly infer where and when an image was captured. Yet these models typically encode each modality (image, location, time) independently and align only the final embeddings through contrastive learning. Without an explicit cross-modal fusion mechanism, they struggle to capture rich geo-temporal relationships and to model how visual appearance at a fixed location evolves over time.
+
+To address this challenge, we propose a novel approach using a multi-modal transformer that leverages self-attention to jointly process visual, geo-location, and temporal information. One or more modality-specific embeddings are passed through the multi-modal transformer, aggregating information across modalities and producing a unified representation that is then projected into a joint geo-temporal embedding space. By allowing modalities to attend to each other, the model learns geo-temporal correlations \emph{directly}, rather than aligning separately learned embeddings post hoc, thereby enabling robust retrieval even when metadata is incomplete or noisy.
+
+The learned representation serves as a unified geo-temporal embedding that supports: (i) geo-localization, (ii) time-of-capture prediction, and (iii) geo-time aware image retrieval. Given an image and a target time, \tiger performs retrieval based on \emph{where} and \emph{when} the scene is, rather than purely on how it looks, making it more robust to substantial seasonal, structural, and lighting changes.
+
+However, developing such models also requires large, high-quality image datasets paired with geo-locations and timestamps. Existing datasets are often geographically biased toward the Northern Hemisphere \cite{mihail2016sky} or contain substantial degraded or low-quality imagery \cite{jacobs07amos, jacobs09webcamgis}, making them insufficient for rigorous evaluation at global scale. To address this gap, we introduce a new benchmark for geo-time aware image retrieval. Our benchmark is constructed from a curated subset of the AMOS webcam corpus~\cite{jacobs09webcamgis, jacobs07amos}, which offers global geographic coverage and continuous image capture across seasons, weather conditions, and times of day. We develop a multi-stage curation pipeline to (i) remove noisy, low-quality, or corrupted frames, (ii) normalize and balance geographic coverage, and (iii) construct train/test splits that preserve both spatial and temporal diversity. The resulting dataset provides a challenging yet reliable platform for evaluating models that must reason jointly over images, locations, and timestamps.
+
+% In summary, we make the following key contributions:
+% \begin{itemize}
+%     \item We introduce the problem of geo-time aware image retrieval, which requires retrieval aligned in both geographic location and time-of-capture.
+%     \item We propose \tiger, a multimodal transformer-based model that learns a unified geo-temporal embedding space through cross-modal attention over images, locations, and times.
+%     \item We curate both training and benchmark datasets with global coverage, temporal diversity, and high-quality filtering, providing the first large-scale testbed tailored to this problem.
+%     \item We demonstrate that \tiger achieves an average of 16\% gains on time-of-year (ToY) prediction, 8\% on time-of-day (ToD) prediction and up to 14\% over SoTA time-of-capture prediction and geo-time aware retrieval baselines across diverse geographic and temporal conditions.
+% \end{itemize}
+
+\noindent In summary, our key contributions are as follows:
+\begin{itemize}
+    \item We introduce geo-time aware image retrieval, a new task that requires retrieving images consistent with both the geographic location and target time-of-capture of a query.
+    \item We propose \tiger, a multimodal transformer-based framework that learns a unified geo-temporal embedding space through cross-modal attention over image, location, and time inputs.
+    \item We curate both a large-scale training dataset and a benchmark dataset with global geographic coverage, broad temporal diversity, and extensive quality filtering, providing the first large-scale testbed tailored to this task.
+    \item We show that \tiger outperforms prior methods, achieving average improvements of 16\% on time-of-year prediction, 8\% on time-of-day prediction, and up to 14\% over state-of-the-art baselines for time-of-capture prediction and geo-time aware retrieval.
+\end{itemize}

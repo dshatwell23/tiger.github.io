@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="TIGeR is a unified framework for time, image, and geo-location retrieval that supports geo-time aware image retrieval, time prediction, and geo-localization.">
+  <meta name="keywords" content="TIGeR, geo-time retrieval, geo-localization, time prediction, multimodal retrieval, CVPR 2026">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TIGeR: A Unified Framework for Time, Images and Geo-location Retrieval</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar is-white tiger-navbar" role="navigation" aria-label="main navigation">
+  <div class="container is-max-desktop">
+    <div class="navbar-brand">
+      <a class="navbar-item tiger-wordmark" href="#top">TIGeR</a>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#overview">Overview</a>
+        <a class="navbar-item" href="#abstract">Abstract</a>
+        <a class="navbar-item" href="#method">Method</a>
+        <a class="navbar-item" href="#results">Results</a>
+        <a class="navbar-item" href="#bibtex">BibTeX</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="hero tiger-hero" id="top">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-vcentered is-variable is-6">
+        <div class="column is-6-desktop">
+          <p class="publication-venue">CVPR 2026</p>
+          <h1 class="title is-1 publication-title">TIGeR: A Unified Framework for Time, Images and Geo-location Retrieval</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">David G. Shatwell,</span>
+            <span class="author-block">Sirnam Swetha,</span>
+            <span class="author-block">Mubarak Shah</span>
+          </div>
+          <div class="is-size-5 publication-authors publication-affiliation">
+            <span class="author-block">Institute of Artificial Intelligence, University of Central Florida</span>
+          </div>
+          <p class="hero-summary">
+            TIGeR learns a shared geo-temporal embedding for images, GPS coordinates, and timestamps,
+            enabling geo-time aware image retrieval, time-of-capture prediction, and geo-localization
+            within one unified framework.
+          </p>
+          <div class="hero-pills">
+            <span class="hero-pill">4.5M training triplets</span>
+            <span class="hero-pill">86k evaluation triplets</span>
+            <span class="hero-pill">3 retrieval tasks</span>
+          </div>
+          <div class="publication-links">
+            <a href="#abstract" class="button is-dark is-rounded is-normal">Abstract</a>
+            <a href="#method" class="button is-light is-rounded is-normal">Method</a>
+            <a href="#results" class="button is-light is-rounded is-normal">Results</a>
+          </div>
+        </div>
+        <div class="column is-6-desktop">
+          <figure class="paper-figure hero-figure">
+            <img src="./static/images/tiger/geotime-fig.png" alt="Overview of TIGeR geo-time aware image retrieval.">
+            <figcaption>
+              Given a query image and a target time, TIGeR retrieves an image from the same physical
+              location at the specified time rather than relying on raw visual similarity alone.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="overview">
+  <div class="container is-max-desktop">
+    <div class="columns">
+      <div class="column">
+        <div class="overview-card">
+          <h2 class="title is-4">What TIGeR Solves</h2>
+          <p>
+            Many real-world applications need to jointly reason about how a place looks, where it is,
+            and when it was captured. TIGeR formalizes this as geo-time aware image retrieval:
+            retrieve an image of the same place at a specified target time.
+          </p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="overview-card">
+          <h2 class="title is-4">Why It Matters</h2>
+          <p>
+            The model preserves location identity across large seasonal, lighting, and structural
+            changes, making it useful for digital forensics, environmental monitoring, and
+            long-term visual analysis.
+          </p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="overview-card">
+          <h2 class="title is-4">Main Outcome</h2>
+          <p>
+            TIGeR consistently improves over strong baselines, with up to 16% better time-of-year
+            prediction, 8% better time-of-day prediction, and 14% better geo-time retrieval recall.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft" id="abstract">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 has-text-centered">Abstract</h2>
+        <div class="content has-text-justified paper-copy">
+          <p>
+            Many real-world applications in digital forensics, urban monitoring, and environmental
+            analysis require jointly reasoning about visual appearance, location, and time. Beyond
+            standard geo-localization and time-of-capture prediction, these applications increasingly
+            demand more complex capabilities, such as retrieving an image captured at the same location
+            as a query image but at a specified target time.
+          </p>
+          <p>
+            TIGeR is a unified framework for <strong>T</strong>ime, <strong>I</strong>mages and
+            <strong>Ge</strong>o-location <strong>R</strong>etrieval. It supports flexible input
+            configurations across single-modality and multi-modality queries and uses one shared
+            representation to perform geo-localization, time-of-capture prediction, and geo-time aware
+            retrieval.
+          </p>
+          <p>
+            To support this setting, the paper introduces a multistage curation pipeline and a new
+            benchmark containing 4.5M paired image-location-time triplets for training and 86k
+            high-quality triplets for evaluation. By preserving location identity despite large
+            appearance changes, TIGeR retrieves images based on where and when a scene was captured,
+            not just how it looks.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="method">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Method</h2>
+        <div class="content has-text-justified paper-copy">
+          <p>
+            TIGeR embeds image, geo-location, and time into a shared geo-temporal feature space. A
+            frozen CLIP visual encoder produces image tokens, while dedicated location and time
+            encoders represent GPS coordinates and timestamps using random Fourier features. These
+            unimodal and bimodal token sets are processed by a shared multimodal transformer that
+            learns explicit interactions between where, when, and how a place appears.
+          </p>
+          <p>
+            The refined tokens are pooled and projected into a shared embedding space. TIGeR is trained
+            with cross-modal contrastive objectives so that compatible image, location, and time inputs
+            align, while auxiliary classification heads with soft metric targets regularize the space to
+            vary smoothly over nearby places and nearby times.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <figure class="paper-figure">
+      <img src="./static/images/tiger/architecture.png" alt="Architecture diagram of TIGeR.">
+      <figcaption>
+        TIGeR uses modality-specific encoders, a shared multimodal transformer, and joint
+        contrastive plus soft classification losses to build a unified geo-temporal embedding space.
+      </figcaption>
+    </figure>
+
+    <div class="columns is-variable is-6 method-cards">
+      <div class="column">
+        <div class="overview-card">
+          <h3 class="title is-5">Flexible Querying</h3>
+          <p>
+            The same representation supports single-modality and fused queries such as
+            <code>I -&gt; t</code>, <code>I -&gt; l</code>, and <code>It -&gt; I</code>.
+          </p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="overview-card">
+          <h3 class="title is-5">Cross-Modal Fusion</h3>
+          <p>
+            Instead of aligning modalities only at the end, the shared transformer lets image,
+            location, and time tokens attend to each other directly.
+          </p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="overview-card">
+          <h3 class="title is-5">Structured Supervision</h3>
+          <p>
+            Soft targets over discretized location and time classes encourage embeddings to respect
+            geographic and temporal neighborhood structure.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-variable is-6 is-vcentered dataset-section">
+      <div class="column is-7-desktop">
+        <h3 class="title is-4">Dataset and Benchmark Curation</h3>
+        <div class="content has-text-justified paper-copy">
+          <p>
+            The benchmark is curated from AMOS webcam data using a semi-supervised quality filtering
+            pipeline. TIGeR identifies corruption modes, trains an image-quality classifier on labeled
+            examples, removes low-quality frames, and then builds geographically balanced train and
+            test splits with no camera overlap.
+          </p>
+          <p>
+            The resulting dataset contains 4.5M training images and 86k evaluation images with broad
+            geographic coverage and substantial diversity across months and times of day.
+          </p>
+        </div>
+      </div>
+      <div class="column is-5-desktop">
+        <figure class="paper-figure compact-figure">
+          <img src="./static/images/tiger/data-pipeline.png" alt="Dataset curation pipeline for TIGeR.">
+          <figcaption>
+            Multistage curation filters corrupted imagery and produces balanced train and benchmark
+            splits.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <figure class="paper-figure compact-figure">
+      <img src="./static/images/tiger/dataset-distribution.png" alt="Dataset distribution visualization for TIGeR.">
+      <figcaption>
+        The benchmark covers diverse locations worldwide and maintains broad month and hour
+        distributions.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section section-soft" id="results">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Main Results</h2>
+        <p class="results-intro has-text-centered">
+          TIGeR outperforms prior geo-temporal baselines across geo-time retrieval, time prediction,
+          and geo-localization on both TIGeR-test-86k and CVT.
+        </p>
+      </div>
+    </div>
+
+    <div class="columns is-multiline result-highlights">
+      <div class="column is-4-desktop is-6-tablet">
+        <div class="result-card">
+          <p class="result-kicker">Geo-time Retrieval</p>
+          <p class="result-value">37.51%</p>
+          <p class="result-label">R@10 on TIGeR-test-86k</p>
+          <p class="result-note">Up to 14% higher recall than prior methods.</p>
+        </div>
+      </div>
+      <div class="column is-4-desktop is-6-tablet">
+        <div class="result-card">
+          <p class="result-kicker">Time Prediction</p>
+          <p class="result-value">47.00</p>
+          <p class="result-label">Best ToY error on CVT with <code>Il -&gt; t</code></p>
+          <p class="result-note">Up to 16% better time-of-year prediction.</p>
+        </div>
+      </div>
+      <div class="column is-4-desktop is-6-tablet">
+        <div class="result-card">
+          <p class="result-kicker">Geo-localization</p>
+          <p class="result-value">66.53%</p>
+          <p class="result-label">750 km recall on CVT with <code>I -&gt; l</code></p>
+          <p class="result-note">Strong gains over GeoCLIP, GT-Loc, and Zhai et al.</p>
+        </div>
+      </div>
+    </div>
+
+    <figure class="paper-figure">
+      <img src="./static/images/tiger/qualitative.png" alt="Qualitative geo-time aware retrieval examples for TIGeR.">
+      <figcaption>
+        Qualitative geo-time aware retrieval: TIGeR retrieves images from the same place at the
+        requested time more reliably than prior approaches.
+      </figcaption>
+    </figure>
+
+    <div class="columns is-variable is-6">
+      <div class="column">
+        <div class="metrics-card">
+          <h3 class="title is-5">Geo-time Aware Image Retrieval</h3>
+          <p class="metrics-copy">
+            Given a query image and target time, TIGeR retrieves an image from the same location at the
+            requested time. It substantially improves recall on the new benchmark and remains strong on CVT.
+          </p>
+          <table class="table is-fullwidth is-striped metrics-table">
+            <thead>
+              <tr>
+                <th>Dataset</th>
+                <th>R@1</th>
+                <th>R@5</th>
+                <th>R@10</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>TIGeR-test-86k</td>
+                <td>3.51</td>
+                <td>23.30</td>
+                <td>37.51</td>
+              </tr>
+              <tr>
+                <td>CVT</td>
+                <td>14.55</td>
+                <td>24.46</td>
+                <td>29.98</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="column">
+        <div class="metrics-card">
+          <h3 class="title is-5">Time Prediction</h3>
+          <p class="metrics-copy">
+            TIGeR improves both time-of-year and time-of-day prediction, and using location as
+            auxiliary context yields further gains.
+          </p>
+          <table class="table is-fullwidth is-striped metrics-table">
+            <thead>
+              <tr>
+                <th>Query</th>
+                <th>Dataset</th>
+                <th>ToY</th>
+                <th>ToD</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>I -&gt; t</code></td>
+                <td>TIGeR-test-86k</td>
+                <td>51.49</td>
+                <td>3.13</td>
+              </tr>
+              <tr>
+                <td><code>I -&gt; t</code></td>
+                <td>CVT</td>
+                <td>62.88</td>
+                <td>2.73</td>
+              </tr>
+              <tr>
+                <td><code>Il -&gt; t</code></td>
+                <td>TIGeR-test-86k</td>
+                <td>48.86</td>
+                <td>3.06</td>
+              </tr>
+              <tr>
+                <td><code>Il -&gt; t</code></td>
+                <td>CVT</td>
+                <td>47.00</td>
+                <td>2.35</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-variable is-6">
+      <div class="column is-6-desktop">
+        <figure class="paper-figure compact-figure">
+          <img src="./static/images/tiger/time-prediction.png" alt="Time prediction distributions for TIGeR.">
+          <figcaption>
+            TIGeR produces sharp, well-localized temporal distributions for both time-of-year and
+            time-of-day prediction.
+          </figcaption>
+        </figure>
+      </div>
+      <div class="column is-6-desktop">
+        <figure class="paper-figure compact-figure">
+          <img src="./static/images/tiger/geo-localization.png" alt="Geo-localization examples for TIGeR.">
+          <figcaption>
+            Retrieved geo-location candidates concentrate near the ground truth across diverse scenes.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="metrics-card">
+      <h3 class="title is-5">Geo-localization Accuracy</h3>
+      <p class="metrics-copy">
+        TIGeR achieves the strongest localization accuracy on both datasets, with especially large
+        gains on the new TIGeR benchmark.
+      </p>
+      <table class="table is-fullwidth is-striped metrics-table">
+        <thead>
+          <tr>
+            <th>Query</th>
+            <th>Dataset</th>
+            <th>200 km</th>
+            <th>750 km</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>I -&gt; l</code></td>
+            <td>TIGeR-test-86k</td>
+            <td>48.63</td>
+            <td>65.61</td>
+          </tr>
+          <tr>
+            <td><code>I -&gt; l</code></td>
+            <td>CVT</td>
+            <td>51.90</td>
+            <td>66.53</td>
+          </tr>
+          <tr>
+            <td><code>It -&gt; l</code></td>
+            <td>TIGeR-test-86k</td>
+            <td>48.34</td>
+            <td>64.51</td>
+          </tr>
+          <tr>
+            <td><code>It -&gt; l</code></td>
+            <td>CVT</td>
+            <td>53.40</td>
+            <td>67.15</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="bibtex">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3 has-text-centered">BibTeX</h2>
+    <pre><code>@inproceedings{shatwell2026tiger,
+  title     = {TIGeR: A Unified Framework for Time, Images and Geo-location Retrieval},
+  author    = {Shatwell, David G. and Swetha, Sirnam and Shah, Mubarak},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2026}
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer tiger-footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>TIGeR project page</p>
+      <p>Institute of Artificial Intelligence, University of Central Florida</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
