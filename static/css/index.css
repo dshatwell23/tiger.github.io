@@ -27,6 +27,11 @@ body {
   line-height: 1.15;
 }
 
+.hero-title {
+  margin-bottom: 1.75rem;
+  max-width: none;
+}
+
 .publication-authors {
   font-family: 'Google Sans', sans-serif;
 }
@@ -54,24 +59,6 @@ body {
   line-height: 1.7;
   margin: 1.5rem 0;
   max-width: 42rem;
-}
-
-.hero-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-}
-
-.hero-pill {
-  background: #fff;
-  border: 1px solid #eadcc5;
-  border-radius: 999px;
-  color: #7d4e10;
-  display: inline-block;
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 0.55rem 0.95rem;
 }
 
 .publication-links {
@@ -121,12 +108,22 @@ body {
   margin: 0;
 }
 
+.hero-content {
+  align-items: center;
+}
+
 .paper-figure figcaption {
   color: #5d6773;
   font-size: 0.95rem;
   line-height: 1.6;
   margin: 0.9rem auto 0;
   max-width: 56rem;
+}
+
+.paired-results-figure img {
+  height: 26rem;
+  object-fit: contain;
+  padding: 1rem;
 }
 
 .method-cards,
@@ -221,5 +218,10 @@ body {
 
   .table.metrics-table {
     font-size: 0.92rem;
+  }
+
+  .paired-results-figure img {
+    height: auto;
+    padding: 0.75rem;
   }
 }

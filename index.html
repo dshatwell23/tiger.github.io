@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="./static/images/favicon.svg">
 
@@ -44,10 +45,14 @@
 <section class="hero tiger-hero" id="top">
   <div class="hero-body">
     <div class="container is-max-desktop">
-      <div class="columns is-vcentered is-variable is-6">
-        <div class="column is-6-desktop">
+      <div class="columns">
+        <div class="column is-full">
           <p class="publication-venue">CVPR 2026</p>
-          <h1 class="title is-1 publication-title">TIGeR: A Unified Framework for Time, Images and Geo-location Retrieval</h1>
+          <h1 class="title is-1 publication-title hero-title">TIGeR: A Unified Framework for Time, Images and Geo-location Retrieval</h1>
+        </div>
+      </div>
+      <div class="columns is-vcentered is-variable is-6 hero-content">
+        <div class="column is-5-desktop">
           <div class="is-size-5 publication-authors">
             <span class="author-block">David G. Shatwell,</span>
             <span class="author-block">Sirnam Swetha,</span>
@@ -61,18 +66,25 @@
             enabling geo-time aware image retrieval, time-of-capture prediction, and geo-localization
             within one unified framework.
           </p>
-          <div class="hero-pills">
-            <span class="hero-pill">4.5M training triplets</span>
-            <span class="hero-pill">86k evaluation triplets</span>
-            <span class="hero-pill">3 retrieval tasks</span>
-          </div>
           <div class="publication-links">
-            <a href="#abstract" class="button is-dark is-rounded is-normal">Abstract</a>
+            <a href="https://arxiv.org/abs/2603.24749" class="button is-dark is-rounded is-normal">
+              <span class="icon">
+                <i class="ai ai-arxiv"></i>
+              </span>
+              <span>arXiv</span>
+            </a>
+            <a href="https://github.com/" class="button is-light is-rounded is-normal">
+              <span class="icon">
+                <i class="fab fa-github"></i>
+              </span>
+              <span>GitHub</span>
+            </a>
+            <!-- <a href="#abstract" class="button is-dark is-rounded is-normal">Abstract</a>
             <a href="#method" class="button is-light is-rounded is-normal">Method</a>
-            <a href="#results" class="button is-light is-rounded is-normal">Results</a>
+            <a href="#results" class="button is-light is-rounded is-normal">Results</a> -->
           </div>
         </div>
-        <div class="column is-6-desktop">
+        <div class="column is-7-desktop">
           <figure class="paper-figure hero-figure">
             <img src="./static/images/tiger/geotime-fig.png" alt="Overview of TIGeR geo-time aware image retrieval.">
             <figcaption>
@@ -179,7 +191,7 @@
     </div>
 
     <figure class="paper-figure">
-      <img src="./static/images/tiger/architecture.png" alt="Architecture diagram of TIGeR.">
+      <img src="./static/images/tiger/architecture_v2.png" alt="Architecture diagram of TIGeR.">
       <figcaption>
         TIGeR uses modality-specific encoders, a shared multimodal transformer, and joint
         contrastive plus soft classification losses to build a unified geo-temporal embedding space.
@@ -234,20 +246,20 @@
       </div>
       <div class="column is-5-desktop">
         <figure class="paper-figure compact-figure">
-          <img src="./static/images/tiger/data-pipeline.png" alt="Dataset curation pipeline for TIGeR.">
+          <img src="./static/images/tiger/test_dustribution_cam_ready.png" alt="Dataset distribution visualization for TIGeR.">
           <figcaption>
-            Multistage curation filters corrupted imagery and produces balanced train and benchmark
-            splits.
+            The benchmark covers diverse locations worldwide and maintains broad month and hour
+            distributions.
           </figcaption>
         </figure>
       </div>
     </div>
 
-    <figure class="paper-figure compact-figure">
-      <img src="./static/images/tiger/dataset-distribution.png" alt="Dataset distribution visualization for TIGeR.">
+    <figure class="paper-figure">
+      <img src="./static/images/tiger/data_pipeline_camera_ready.png" alt="Dataset curation pipeline for TIGeR.">
       <figcaption>
-        The benchmark covers diverse locations worldwide and maintains broad month and hour
-        distributions.
+        Multistage curation filters corrupted imagery and produces balanced train and benchmark
+        splits.
       </figcaption>
     </figure>
   </div>
@@ -271,29 +283,29 @@
           <p class="result-kicker">Geo-time Retrieval</p>
           <p class="result-value">37.51%</p>
           <p class="result-label">R@10 on TIGeR-test-86k</p>
-          <p class="result-note">Up to 14% higher recall than prior methods.</p>
+          <p class="result-note">TIGeR reaches 37.51% R@10 on TIGeR-test-86k and 29.98% on CVT, delivering up to 14% higher geo-time retrieval recall than prior methods.</p>
         </div>
       </div>
       <div class="column is-4-desktop is-6-tablet">
         <div class="result-card">
-          <p class="result-kicker">Time Prediction</p>
-          <p class="result-value">47.00</p>
-          <p class="result-label">Best ToY error on CVT with <code>Il -&gt; t</code></p>
-          <p class="result-note">Up to 16% better time-of-year prediction.</p>
+          <p class="result-kicker">Time Prediction (ToY)</p>
+          <p class="result-value">48.86 days</p>
+          <p class="result-label">Best ToY error on TIGeR-test-86k with <code>Il -&gt; t</code></p>
+          <p class="result-note">TIGeR reduces ToY error to 48.86 on TIGeR-test-86k and 47.00 on CVT, yielding up to 16% better time-of-year prediction.</p>
         </div>
       </div>
       <div class="column is-4-desktop is-6-tablet">
         <div class="result-card">
-          <p class="result-kicker">Geo-localization</p>
-          <p class="result-value">66.53%</p>
-          <p class="result-label">750 km recall on CVT with <code>I -&gt; l</code></p>
-          <p class="result-note">Strong gains over GeoCLIP, GT-Loc, and Zhai et al.</p>
+          <p class="result-kicker">Time Prediction (ToD)</p>
+          <p class="result-value">3.06 hours</p>
+          <p class="result-label">Best ToD error on TIGeR-test-86k with <code>Il -&gt; t</code></p>
+          <p class="result-note">TIGeR lowers ToD error to 3.06 on TIGeR-test-86k and 2.35 on CVT, corresponding to up to 8% better time-of-day prediction.</p>
         </div>
       </div>
     </div>
 
     <figure class="paper-figure">
-      <img src="./static/images/tiger/qualitative.png" alt="Qualitative geo-time aware retrieval examples for TIGeR.">
+      <img src="./static/images/tiger/tiger_qual_crop_horizontal.png" alt="Qualitative geo-time aware retrieval examples for TIGeR.">
       <figcaption>
         Qualitative geo-time aware retrieval: TIGeR retrieves images from the same place at the
         requested time more reliably than prior approaches.
@@ -383,8 +395,8 @@
 
     <div class="columns is-variable is-6">
       <div class="column is-6-desktop">
-        <figure class="paper-figure compact-figure">
-          <img src="./static/images/tiger/time-prediction.png" alt="Time prediction distributions for TIGeR.">
+        <figure class="paper-figure compact-figure paired-results-figure">
+          <img src="./static/images/tiger/time_pred_dist.png" alt="Time prediction distributions for TIGeR.">
           <figcaption>
             TIGeR produces sharp, well-localized temporal distributions for both time-of-year and
             time-of-day prediction.
@@ -392,8 +404,8 @@
         </figure>
       </div>
       <div class="column is-6-desktop">
-        <figure class="paper-figure compact-figure">
-          <img src="./static/images/tiger/geo-localization.png" alt="Geo-localization examples for TIGeR.">
+        <figure class="paper-figure compact-figure paired-results-figure">
+          <img src="./static/images/tiger/geoloc_qual_horizontal.png" alt="Geo-localization examples for TIGeR.">
           <figcaption>
             Retrieved geo-location candidates concentrate near the ground truth across diverse scenes.
           </figcaption>
